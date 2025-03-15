@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import {useTable,Column,Row} from 'react-table';
 
 interface Pizza {
@@ -13,10 +13,11 @@ interface Pizza {
 
 interface PizzaDataProps {
     pizzas: Pizza[];
+    deletePizza?: (id: number) => void;
   }
 
-const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
-
+const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas,deletePizza }) => {
+    const navigate = useNavigate();
     const data = React.useMemo(() => pizzas, [pizzas])
 
     console.log(pizzas);
@@ -44,6 +45,24 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
         {
             Header:"Delivery",accessor:"delivery",
             Cell: ({ value }: { value: boolean }) => (value ? 'Yes' : 'No'),
+        },
+        {
+          id: 'delete',
+          Header: 'Delete',
+          accessor: 'id',
+          Cell: ({ row }: { row: Row<Pizza> }) => (
+            <button
+              onClick={() => {
+                if (deletePizza) {
+                  deletePizza(row.original.id);
+                  navigate('/home'); // Redirect to homepage after deletion
+                }
+              }}
+              style={{ color: 'red', cursor: 'pointer', border: 'none', background: 'none' }}
+            >
+              Delete
+            </button>
+          ),
         }
     ],
     []

@@ -29,6 +29,10 @@ function App() {
 useEffect(() => {
   console.log('Pizza state has changed:', pizza);
 }, [pizza]);
+
+const deletePizza = (id: number) => {
+  setPizza((prevPizza) => prevPizza.filter((p) => p.id !== id));
+};
   return (
     
     <Router>
@@ -36,6 +40,10 @@ useEffect(() => {
         <h1 className='title' id="titlename" style={{ textAlign: 'center', color: '#333'}}>Pizza Hut</h1>
       <Routes>
         <Route path="/" element={<><Button /><AddPizzaButton /></>} />
+        <Route
+            path="/home"
+            element={<PizzaData pizzas={pizza} deletePizza={deletePizza} />}
+          />
         <Route path="/home" element={<PizzaData pizzas={pizza}/>}/>
         <Route path="/add-pizza" element={<PizzaForm setPizza={setPizza} pizza={pizza}/>}/>
         <Route
