@@ -7,6 +7,7 @@ import './components/styles.css';
 import Button, { AddPizzaButton } from './components/HomeButton';
 import PizzaForm from './components/AddPizza';
 import { useEffect } from 'react';
+import EditPizza from './components/EditPizza';
 
 
 function App() {
@@ -37,7 +38,10 @@ useEffect(() => {
         <Route path="/" element={<><Button /><AddPizzaButton /></>} />
         <Route path="/home" element={<PizzaData pizzas={pizza}/>}/>
         <Route path="/add-pizza" element={<PizzaForm setPizza={setPizza} pizza={pizza}/>}/>
-        
+        <Route
+            path="/edit/:id"
+            element={<EditPizza setPizza={setPizza} pizza={pizza} />}
+          />
       </Routes>
       </div>
     </Router>
