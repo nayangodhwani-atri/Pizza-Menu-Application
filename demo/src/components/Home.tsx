@@ -6,7 +6,7 @@ import {useTable,Column,Row} from 'react-table';
 interface Pizza {
     id: number;
     name: string;
-    toppings: string;
+    toppings: string[];
     Favourite: boolean;
     delivery: boolean;
   }
@@ -35,7 +35,7 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
         },
         {
             Header:"Toppings",accessor:"toppings",
-            Cell: ({ value }: { value: string }) => value,
+            Cell: ({ value }: { value: string[] }) => value.join(', '),
         },
         {
             Header:"Favourite",accessor:"Favourite",
@@ -48,12 +48,10 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
     ],
     []
     );
-
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
         columns,
         data,
       });
-
       return (
         <div className="table-container">
           <table {...getTableProps()}>
@@ -84,7 +82,6 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
         </div>
       );
 };
-
 const BackButton = () => {
 
     return (
@@ -92,5 +89,4 @@ const BackButton = () => {
     );
 
 };
-
 export default PizzaDataReact;

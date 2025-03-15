@@ -14,14 +14,14 @@ function App() {
   interface Pizza {
     id: number;
     name: string;
-    toppings: string;
+    toppings: string[];
     Favourite: boolean;
     delivery: boolean;
   }
   const sampleData: Pizza[]=[
-    {id: 1, name: 'Margherita', toppings:'Cheese',Favourite:true, delivery: true},
-    {id: 2, name: 'Pepperoni', toppings:'Black Olives',Favourite:true, delivery: true},
-    {id: 3, name: 'BBQ Chicken', toppings:'Beef',Favourite:true, delivery: true},
+    {id: 1, name: 'Margherita', toppings:['Cheese'],Favourite:true, delivery: true},
+    {id: 2, name: 'Pepperoni', toppings:['Black Olives'],Favourite:true, delivery: true},
+    {id: 3, name: 'BBQ Chicken', toppings:['Beef'],Favourite:true, delivery: true},
 ]
   const [pizza, setPizza] = useState<Pizza[]>(sampleData);
 
@@ -37,6 +37,7 @@ useEffect(() => {
         <Route path="/" element={<><Button /><AddPizzaButton /></>} />
         <Route path="/home" element={<PizzaData pizzas={pizza}/>}/>
         <Route path="/add-pizza" element={<PizzaForm setPizza={setPizza} pizza={pizza}/>}/>
+        
       </Routes>
       </div>
     </Router>

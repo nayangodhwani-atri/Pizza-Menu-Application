@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 interface Pizza {
   id: number;
   name: string;
-  toppings: string;
+  toppings: string[];
   Favourite: boolean;
   delivery: boolean;
 }
@@ -16,9 +16,17 @@ interface PizzaFormProps {
 }
 
 const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza,pizza }) => {
-  const { control, handleSubmit, formState: { errors }, reset } = useForm<Pizza>();
+  const { control, handleSubmit, formState: { errors }, reset } = useForm<Pizza>({
+    defaultValues: {
+      name: '',
+      toppings: [],
+      Favourite: false,
+      delivery: false,
+    },
+  });
+  
+
   const navigate = useNavigate();
-  // Handle form submission
   const onSubmit = (data: Pizza) => {
     const newId = pizza.length > 0 ? Math.max(...pizza.map(p => p.id)) + 1 : 1;
     const newPizza: Pizza = {
@@ -34,6 +42,8 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza,pizza }) => {
     reset();
     navigate('/home');
   };
+
+  const toppingOptions = ['Cheese', 'Pepperoni', 'Black Olives', 'Beef', 'BBQ Sauce', 'Mushrooms'];
 
   return (
     <div>
@@ -54,16 +64,32 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza,pizza }) => {
         <br />
 
         
-        <label>
-          Toppings (comma separated):
-          <Controller
-            name="toppings"
-            control={control}
-            defaultValue={""}
-            rules={{ required: 'Toppings are required' }}
-            render={({ field }) => <input type = "string" {...field} />}
-          />
-        </label>
+        <label>Toppings:</label>
+        <div>
+          {toppingOptions.map((topping) => (
+            <label key={topping} style={{ marginRight: '15px' }}>
+              <Controller
+                name="toppings"
+                control={control}
+                rules={{ required: 'At least one topping is required' }}
+                render={({ field }) => (
+                  <input
+                    type="checkbox"
+                    value={topping}
+                    checked={field.value.includes(topping)}
+                    onChange={(e) => {
+                      const newValue = e.target.checked
+                        ? [...field.value, topping]
+                        : field.value.filter((t: string) => t !== topping);
+                      field.onChange(newValue);
+                    }}
+                  />
+                )}
+              />
+              {topping}
+            </label>
+          ))}
+        </div>
         {errors.toppings && <p>{errors.toppings.message}</p>}
         <br />
 
