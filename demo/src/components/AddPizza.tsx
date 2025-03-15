@@ -6,7 +6,7 @@ interface Pizza {
   id: number;
   name: string;
   toppings: string;
-  Favourite: string;
+  Favourite: boolean;
   delivery: boolean;
 }
 
@@ -30,10 +30,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza,pizza }) => {
     };
 
     console.log(newPizza.name);
-    // Update the pizza state with the new pizza
     setPizza((prevPizza) => [...prevPizza, newPizza]);
-
-    // Clear form fields after submission
     reset();
     navigate('/home');
   };
@@ -72,15 +69,20 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza,pizza }) => {
 
         
         <label>
-          Favourite:
-          <Controller
-            name="Favourite"
-            control={control}
-            defaultValue={"No"}
-            render={({ field }) => <input type="string" {...field} />}
-          />
-        </label>
-        <br />
+  Favourite:
+  <Controller
+    name="Favourite"
+    control={control}
+    defaultValue={false} // Change default value to boolean false instead of "No"
+    render={({ field }) => (
+      <input
+        type="checkbox"
+        checked={field.value} // Use boolean value
+        onChange={(e) => field.onChange(e.target.checked)} // Update value as boolean
+      />
+    )}
+  />
+</label>
 
     
         <label>

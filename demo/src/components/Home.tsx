@@ -7,7 +7,7 @@ interface Pizza {
     id: number;
     name: string;
     toppings: string;
-    Favourite: string;
+    Favourite: boolean;
     delivery: boolean;
   }
 
@@ -39,7 +39,7 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
         },
         {
             Header:"Favourite",accessor:"Favourite",
-            Cell: ({ value }: { value: string }) => (value ? 'Yes' : 'No'),
+            Cell: ({ value }: { value: boolean }) => (value ? 'Yes' : 'No'),
         },
         {
             Header:"Delivery",accessor:"delivery",
@@ -84,22 +84,6 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
         </div>
       );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const BackButton = () => {
 
