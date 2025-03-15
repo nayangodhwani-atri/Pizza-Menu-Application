@@ -1,27 +1,30 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 interface Pizza {
   id: number;
   name: string;
-  toppings: string[];
+  toppings: string;
   Favourite: string;
   delivery: boolean;
 }
 
 interface PizzaFormProps {
   setPizza: React.Dispatch<React.SetStateAction<Pizza[]>>; 
+  pizza: Pizza[];
 }
 
-const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza }) => {
+const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza,pizza }) => {
   const { control, handleSubmit, formState: { errors }, reset } = useForm<Pizza>();
-
+  const navigate = useNavigate();
   // Handle form submission
   const onSubmit = (data: Pizza) => {
+    const newId = pizza.length > 0 ? Math.max(...pizza.map(p => p.id)) + 1 : 1;
     const newPizza: Pizza = {
-      id: data.id, 
+      id: newId, 
       name: data.name,
-      toppings: data.toppings.map((topping: string) => topping.trim()), 
+      toppings: data.toppings,
       Favourite: data.Favourite,
       delivery: data.delivery,
     };
@@ -32,6 +35,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza }) => {
 
     // Clear form fields after submission
     reset();
+    navigate('/home');
   };
 
   return (
@@ -58,9 +62,9 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza }) => {
           <Controller
             name="toppings"
             control={control}
-            defaultValue={[]}
+            defaultValue={""}
             rules={{ required: 'Toppings are required' }}
-            render={({ field }) => <input {...field} />}
+            render={({ field }) => <input type = "string" {...field} />}
           />
         </label>
         {errors.toppings && <p>{errors.toppings.message}</p>}
@@ -85,7 +89,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza }) => {
             name="delivery"
             control={control}
             defaultValue={false}
-            render={({ field }) => <input type="checkbox" {...field} checked={field.value} />}
+            render={({ field }) => <input type="checkbox" checked={field.value} onChange={(e) => field.onChange(e.target.checked)}/>}
           />
         </label>
         <br />

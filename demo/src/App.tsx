@@ -6,6 +6,7 @@ import PizzaData from './components/Home';
 import './components/styles.css';
 import Button, { AddPizzaButton } from './components/HomeButton';
 import PizzaForm from './components/AddPizza';
+import { useEffect } from 'react';
 
 
 function App() {
@@ -13,17 +14,20 @@ function App() {
   interface Pizza {
     id: number;
     name: string;
-    toppings: string[];
+    toppings: string;
     Favourite: string;
     delivery: boolean;
   }
+  const sampleData: Pizza[]=[
+    {id: 1, name: 'Margherita', toppings:'Cheese',Favourite:"Yes", delivery: true},
+    {id: 2, name: 'Pepperoni', toppings:'Black Olives',Favourite:"Yes", delivery: true},
+    {id: 3, name: 'BBQ Chicken', toppings:'Beef',Favourite:"Yes", delivery: true},
+]
+  const [pizza, setPizza] = useState<Pizza[]>(sampleData);
 
-  const [pizza, setPizza] = useState<Pizza[]>([
-
-    {id: 1, name: 'Margherita', toppings:['Cheese'],Favourite:"Yes", delivery: true},
-    {id: 2, name: 'Pepperoni', toppings:['Black Olives'],Favourite:"Yes", delivery: true},
-    {id: 3, name: 'BBQ Chicken', toppings:['Beef'],Favourite:"Yes", delivery: true},
-]);
+useEffect(() => {
+  console.log('Pizza state has changed:', pizza);
+}, [pizza]);
   return (
     
     <Router>
@@ -32,7 +36,7 @@ function App() {
       <Routes>
         <Route path="/" element={<><Button /><AddPizzaButton /></>} />
         <Route path="/home" element={<PizzaData pizzas={pizza}/>}/>
-        <Route path="/add-pizza" element={<PizzaForm setPizza={setPizza}/>}/>
+        <Route path="/add-pizza" element={<PizzaForm setPizza={setPizza} pizza={pizza}/>}/>
       </Routes>
       </div>
     </Router>

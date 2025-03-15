@@ -6,7 +6,7 @@ import {useTable,Column,Row} from 'react-table';
 interface Pizza {
     id: number;
     name: string;
-    toppings: string[];
+    toppings: string;
     Favourite: string;
     delivery: boolean;
   }
@@ -15,12 +15,11 @@ interface PizzaDataProps {
     pizzas: Pizza[];
   }
 
-  
-
-
 const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
 
     const data = React.useMemo(() => pizzas, [pizzas])
+
+    console.log(pizzas);
 
     const columns: Column<Pizza>[] =  React.useMemo(
 
@@ -36,7 +35,7 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
         },
         {
             Header:"Toppings",accessor:"toppings",
-            Cell: ({ value }: { value: string[] }) => value.join(', '),
+            Cell: ({ value }: { value: string }) => value,
         },
         {
             Header:"Favourite",accessor:"Favourite",
@@ -60,9 +59,9 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
           <table {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
+                <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
                   {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                    <th {...column.getHeaderProps()} key={column.id}>{column.render('Header')}</th>
                   ))}
                 </tr>
               ))}
@@ -71,9 +70,9 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas }) => {
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr {...row.getRowProps()} key={row.id}>
                     {row.cells.map((cell) => {
-                      return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                      return <td {...cell.getCellProps()} key={cell.column.id}>{cell.render('Cell')}</td>;
                     })}
                   </tr>
                 );
