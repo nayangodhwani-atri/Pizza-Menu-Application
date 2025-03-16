@@ -1,36 +1,118 @@
-.table-container{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body, #root {
+    height: 100%;
     width: 100%;
-    margin: 20px auto;
+    margin: 0;
+    padding: 0;
+  }
+  .home-page {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(
+        rgba(255, 245, 230, 0.8),
+        rgba(240, 255, 240, 0.8) 
+      ),
+      url('src/assets/pizza.jpg') 
+        no-repeat center center fixed;
+    background-size: cover;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+  }
+  .title {
+    font-family: 'Arial', sans-serif;
+    font-size: 3rem;
+    color: #333;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+
+  .table-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9); 
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
-}
-table{
+    padding: 20px;
+  }
+  table {
     width: 100%;
     border-collapse: collapse;
-    box-shadow: 0px 0px 10px rgba (0,0,0,0.1);
-}
-th{
-    background-color: #90CAF9;
+  }
+  th {
+    background: linear-gradient(135deg, #90CAF9, #64B5F6); 
     color: white;
-    padding: 12px 15px;
+    padding: 15px;
     text-align: left;
     font-weight: bold;
     text-transform: uppercase;
-}
-td{
-    padding:12px 15px;
+    letter-spacing: 1px;
+  }
+  td {
+    padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-}
+    border-bottom: 1px solid #eee;
+    color: #444;
+  }
 
-tr:nth-child(even){
-    background-color: #f2f2f2;
-}
-a{
-    color:#4CAF50
-}
-a:hover{
+  tr:nth-child(even) {
+    background-color: #f9f9f9; 
+  }
+  
+  tr:hover {
+    background-color: #f1f5f9; 
+  }
+  a {
+    color: #4CAF50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #388E3C;
     text-decoration: underline;
-}
+  }
+
+
+
+  .button {
+    background: linear-gradient(135deg, #65A1EE, #4A86E8); 
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .delete-button {
+    color: #e57373; 
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .delete-button:hover {
+    color: #d32f2f; 
+  }
+
+
 #forButton{
     background-color: rgb(101, 101, 238);
     color: white;
@@ -59,11 +141,27 @@ a:hover{
     padding: 10px 20px;
     margin-left: 20px;
 }
-.delete-button {
-    color: red;
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-weight: bold;
+
+
+
+
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2rem;
+    }
+  
+    .table-container {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    th, td {
+      padding: 10px;
+    }
+  
+    .button {
+      padding: 10px 20px;
+    }
   }
 

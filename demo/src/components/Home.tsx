@@ -52,6 +52,7 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas,deletePizza }) => {
           accessor: 'id',
           Cell: ({ row }: { row: Row<Pizza> }) => (
             <button
+            className="delete-button"
               onClick={() => {
                 if (deletePizza) {
                   deletePizza(row.original.id);
@@ -72,6 +73,8 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas,deletePizza }) => {
         data,
       });
       return (
+        <div className="home-page">
+          <h1 className="title">Pizza Hut</h1>
         <div className="table-container">
           <table {...getTableProps()}>
             <thead>
@@ -98,6 +101,7 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas,deletePizza }) => {
           </table>
           <BackButton />  
         
+        </div>
         </div>
       );
 };

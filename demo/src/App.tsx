@@ -36,8 +36,7 @@ const deletePizza = (id: number) => {
   return (
     
     <Router>
-      <div>
-        <h1 className='title' id="titlename" style={{ textAlign: 'center', color: '#333'}}>Pizza Hut</h1>
+      <div style={{ height: '100vh', width: '100vw' }}>
       <Routes>
         <Route path="/" element={<><Button /><AddPizzaButton /></>} />
         <Route
