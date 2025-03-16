@@ -56,7 +56,7 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas,deletePizza }) => {
               onClick={() => {
                 if (deletePizza) {
                   deletePizza(row.original.id);
-                  navigate('/home'); // Redirect to homepage after deletion
+                  navigate('/');
                 }
               }}
               style={{ color: 'red', cursor: 'pointer', border: 'none', background: 'none' }}
@@ -99,17 +99,14 @@ const PizzaDataReact: React.FC<PizzaDataProps> = ({ pizzas,deletePizza }) => {
               })}
             </tbody>
           </table>
-          <BackButton />  
-        
+          <Link to="/add-pizza">
+            <button className="button" style={{ marginTop: '20px' }}>
+              Add Pizza
+            </button>
+          </Link> 
         </div>
         </div>
       );
 };
-const BackButton = () => {
 
-    return (
-        <Link to="/"> <button className="button" id="backButton">Go to Home</button></Link>
-    );
-
-};
 export default PizzaDataReact;

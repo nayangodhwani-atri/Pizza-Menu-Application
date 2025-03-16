@@ -4,7 +4,6 @@ import './App.css';
 import {useState} from 'react';
 import PizzaData from './components/Home';
 import './components/styles.css';
-import Button, { AddPizzaButton } from './components/HomeButton';
 import PizzaForm from './components/AddPizza';
 import { useEffect } from 'react';
 import EditPizza from './components/EditPizza';
@@ -38,12 +37,11 @@ const deletePizza = (id: number) => {
     <Router>
       <div style={{ height: '100vh', width: '100vw' }}>
       <Routes>
-        <Route path="/" element={<><Button /><AddPizzaButton /></>} />
         <Route
-            path="/home"
+            path="/"
             element={<PizzaData pizzas={pizza} deletePizza={deletePizza} />}
           />
-        <Route path="/home" element={<PizzaData pizzas={pizza}/>}/>
+        
         <Route path="/add-pizza" element={<PizzaForm setPizza={setPizza} pizza={pizza}/>}/>
         <Route
             path="/edit/:id"

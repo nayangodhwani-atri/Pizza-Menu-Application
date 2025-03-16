@@ -38,7 +38,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ setPizza, pizza }) => {
     };
     setPizza((prevPizza) => [...prevPizza, newPizza]);
     reset();
-    navigate('/home');
+    navigate('/');
   };
 
   const toppingOptions = ['Cheese', 'Pepperoni', 'Black Olives', 'Beef', 'BBQ Sauce', 'Mushrooms'];
