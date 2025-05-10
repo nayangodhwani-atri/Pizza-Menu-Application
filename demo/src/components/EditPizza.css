@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  .edit-pizza-page {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(
+        rgba(255, 245, 230, 0.8), 
+        rgba(240, 255, 240, 0.8) 
+      ),
+      url('src/assets/pizza.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .edit-pizza-content {
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+  }
+  
+  .title {
+    font-family: 'Arial', sans-serif;
+    font-size: 3rem;
+    color: #333;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  .form-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .form-label {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #444; 
+    text-align: right;
+  }
+  
+  .form-input {
+    flex: 2;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  form p {
+    color: #e57373;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .button {
+    background: linear-gradient(135deg, #65A1EE, #4A86E8); 
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 20px;
+  }
+  
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2rem;
+    }
+  
+    .form-container {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .form-label {
+      text-align: left;
+    }
+  
+    .button {
+      padding: 10px 20px;
+    }
+  }
